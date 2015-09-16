@@ -120,6 +120,7 @@ class ViewController: UIViewController {
 		return color
 	}
 	
+	// 只剩下这一个功能了，打算不做了，留下练手的机会
   @IBAction func segmentedControl(control: UISegmentedControl) {
     
   }
