@@ -21,6 +21,8 @@ class ViewController: UIViewController {
 
 	// 上下文
 	var managedContest: NSManagedObjectContext!
+	// 当前显示领结
+	var currentBowtie: Bowtie!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,7 +33,7 @@ class ViewController: UIViewController {
 		// 2 从coreData获取数据
 		let request = NSFetchRequest(entityName: "Bowtie")
 		let firstTitle = segmentedControl.titleForSegmentAtIndex(0)
-		print("要查找seg的title［0］： \(firstTitle)")
+//		print("要查找seg的title［0］： \(firstTitle)")
 		
 		// 3 根据segment的tilte配置请求，然后执行查找相应数据
 		request.predicate = NSPredicate(format: "searchKey == %@", firstTitle!)
@@ -40,6 +42,8 @@ class ViewController: UIViewController {
 		
 		// 4 显示到UI
 		if let bowties = results {
+			// 纪录当前显示领结
+			currentBowtie = bowties[0]
 			populate(bowties[0])
 		}else {
 			print("未能获取\(error),\(error!.userInfo)")
@@ -62,7 +66,6 @@ class ViewController: UIViewController {
 
 		view.tintColor = bowtie.tintColor as! UIColor // 颜色依旧是颜色
 	}
-	
 	/**
 	从plist获取数据，然后插入到data
 	*/
@@ -121,12 +124,61 @@ class ViewController: UIViewController {
     
   }
 
+	// wear之后：times加1，lastWorn更新
   @IBAction func wear(sender: AnyObject) {
-    
+		
+		let times = currentBowtie.timesWorn.integerValue
+		currentBowtie.timesWorn = NSNumber(integer: (times + 1))
+		
+		currentBowtie.lastWorn = NSDate()
+		
+		// 改动上下文commit
+		var error: NSError?
+		if !managedContest.save(&error) {
+			print("currentBowtie wear后，未能保存\(error),\(error!.userInfo)")
+		}
+		
+		// 更新UI
+		populate(currentBowtie)
   }
-  
+	
+	// 评价之后，更新新的rate
   @IBAction func rate(sender: AnyObject) {
-    
-  }
+		
+		let alert = UIAlertController(title: "New Rating", message: "为领结打分", preferredStyle: UIAlertControllerStyle.Alert)
+		let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+		let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default) { (_) -> Void in
+			let textField = alert.textFields![0] as! UITextField
+			self.updateRating(textField.text)
+		}
+		
+		alert.addTextFieldWithConfigurationHandler(nil)
+		
+		alert.addAction(cancelAction)
+		alert.addAction(saveAction)
+		
+		self.presentViewController(alert, animated: true, completion: nil)
+	}
+	
+	func updateRating(numericString: String) {
+		// 将字符串变为double
+		currentBowtie.rating = (numericString as NSString).doubleValue
+		
+		var error: NSError?
+		if !managedContest.save(&error) {
+			
+			/*
+				如果错误是，评分过大或过小，不更新rate，评分无效
+			*/
+			print("currentBowtie更新rate后，未能保存\(error),\(error!.userInfo)")
+			if error!.code == NSValidationDateTooLateError || error!.code == NSValidationDateTooSoonError {
+				rate(currentBowtie)
+			}
+			
+		}else {
+				populate(currentBowtie)
+		}
+	}
+		
 }
 
