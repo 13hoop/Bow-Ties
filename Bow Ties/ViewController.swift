@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
   
@@ -18,7 +19,10 @@ class ViewController: UIViewController {
   @IBOutlet weak var lastWornLabel: UILabel!
   @IBOutlet weak var favoriteLabel: UILabel!
 
-  override func viewDidLoad() {
+	// 上下文
+	var managedContest: NSManagedObjectContext!
+    
+    override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     

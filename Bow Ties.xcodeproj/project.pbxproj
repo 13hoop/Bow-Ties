@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4EB0A771BA824F300DBF7DA /* Bowtie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EB0A761BA824F300DBF7DA /* Bowtie.swift */; };
 		FEC9FF5C195B66BA00FC7178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC9FF5B195B66BA00FC7178 /* AppDelegate.swift */; };
 		FEC9FF5F195B66BA00FC7178 /* Bow_Ties.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEC9FF5D195B66BA00FC7178 /* Bow_Ties.xcdatamodeld */; };
 		FEC9FF61195B66BA00FC7178 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC9FF60195B66BA00FC7178 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B4EB0A761BA824F300DBF7DA /* Bowtie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bowtie.swift; path = ../Bowtie.swift; sourceTree = "<group>"; };
 		FEC9FF56195B66BA00FC7178 /* Bow Ties.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bow Ties.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEC9FF5A195B66BA00FC7178 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEC9FF5B195B66BA00FC7178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				FEC9FF62195B66BA00FC7178 /* Main.storyboard */,
 				FEC9FF65195B66BA00FC7178 /* Images.xcassets */,
 				FECA67D919608DFD00FE0166 /* SampleData.plist */,
+				B4EB0A761BA824F300DBF7DA /* Bowtie.swift */,
 				FEC9FF5D195B66BA00FC7178 /* Bow_Ties.xcdatamodeld */,
 				FEC9FF59195B66BA00FC7178 /* Supporting Files */,
 			);
@@ -159,6 +162,7 @@
 		FEC9FF4E195B66BA00FC7178 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Razeware;
 				TargetAttributes = {
@@ -216,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEC9FF61195B66BA00FC7178 /* ViewController.swift in Sources */,
+				B4EB0A771BA824F300DBF7DA /* Bowtie.swift in Sources */,
 				FEC9FF5C195B66BA00FC7178 /* AppDelegate.swift in Sources */,
 				FEC9FF5F195B66BA00FC7178 /* Bow_Ties.xcdatamodeld in Sources */,
 			);

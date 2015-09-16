@@ -16,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
+
+    self.test()
+		
+		
+		
     return true
   }
   
@@ -106,6 +110,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
   }
-  
+    
+// MARK: text
+/*
+    To make sure everything is hooked up correctly between
+    the data model and your new managed object subclass,
+    let’s perform a small test.
+*/
+    func test() {
+        
+        // save 存
+        let entity = NSEntityDescription.entityForName("Bowtie", inManagedObjectContext: managedObjectContext!)
+        let bowtie = Bowtie(entity: entity!, insertIntoManagedObjectContext: managedObjectContext!)
+        bowtie.name = "My bow tie"
+        bowtie.lastWorn = NSDate()
+        managedObjectContext!.save(nil)
+
+        // Retrieve 取
+        let request = NSFetchRequest(entityName: "Bowtie")
+        let ties = managedObjectContext!.executeFetchRequest(request, error: nil) as! [Bowtie]
+        let sample = ties[0]
+
+        print("Name:\(sample.name), Worn: \(sample.lastWorn)")
+    }
+    
 }
 
