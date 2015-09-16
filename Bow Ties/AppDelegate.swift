@@ -16,10 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-    self.test()
+//    self.test()
 		
-		
+		// propagate context － 传递上下文到控制器
+		let viewController = self.window!.rootViewController as! ViewController
+		viewController.managedContest = self.managedObjectContext
 		
     return true
   }
